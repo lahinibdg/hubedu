@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     const verified = await verifyMessage({
       address: address as Address,
       message,
-      signature,
+      signature: signature as `0x${string}`,
     });
     if (!verified) {
       return NextResponse.json({ error: "Signature tidak valid" }, { status: 401 });
