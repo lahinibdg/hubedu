@@ -19,7 +19,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "address, signature, nonce diperlukan" }, { status: 400 });
     }
 
-    const nonceCookie = cookies().get(NONCE_COOKIE)?.value;
+    const cookieStore = await cookies();
+    const nonceCookie = cookieStore.get(NONCE_COOKIE)?.value;
     if (!nonceCookie || nonceCookie !== nonce) {
       return NextResponse.json({ error: "Nonce tidak valid" }, { status: 400 });
     }
